@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+static def buildTime() {
+    return new Date().format("yyyyMMdd");
+}
+
+android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('E:/my_demo_workspace/ModuleBuild/keystore.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+    defaultConfig {
+        applicationId "com.rain.modulebuild"
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // 打包时间
+        resValue "string", "build_time", buildTime()
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug{
+            // 给applicationId添加后缀“.debug”
+            applicationIdSuffix ".debug"
+        }
+
+
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(path: ':baselib')
+}

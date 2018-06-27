@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    api rootProject.ext.supportLibs
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api rootProject.ext.otherLibs
+    api rootProject.ext.annotationProcessorLibs
+    // butterknife
+    api rootProject.ext.butterknife
+    // annotationProcessorLibs
+    annotationProcessor rootProject.annotationProcessorLibs
+    // 沉浸式状态栏
+    api rootProject.ext.barlibrary
+    // 多视图显示
+    api rootProject.ext.multipleStatusView
+    // 网络请求
+    api rootProject.ext.networkLibs
+    // rxjava2
+    api rootProject.ext.rxJavaLibs
+    //router
+    api rootProject.ext.arouter_api
+}
