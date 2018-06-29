@@ -1,6 +1,8 @@
 package com.rain.module_main.debug;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.rain.baselib.base.BaseApplication;
+import com.rain.baselib.util.Utils;
 
 /**
  * Author:rain
@@ -8,4 +10,8 @@ import com.rain.baselib.base.BaseApplication;
  * Description:
  */
 public class MainApplication extends BaseApplication {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 }

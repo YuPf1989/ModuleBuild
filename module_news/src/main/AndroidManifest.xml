@@ -2,5 +2,5 @@
     package="com.rain.module_news">
 
     <application
-        android:theme="@style/AppTheme" />
+         />
 </manifest>

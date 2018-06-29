@@ -1,8 +1,8 @@
 package com.rain.baselib.net;
 
 
-
 import com.rain.baselib.base.BaseApplication;
+import com.rain.baselib.mvp.model.api.UrlConstant;
 import com.rain.baselib.util.SPUtils;
 
 import java.io.IOException;
@@ -24,47 +24,57 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Description:retrofit工具类
  */
 
-public class RetrofitHelper {
+public class RetrofitHelper<T> {
 
     private static final int DEFAULT_TIMEOUT = 5;
 
-    private static RetrofitHelper retrofitHelper = new RetrofitHelper();
-
     private static final String TAG = "RetrofitHelper";
+
+    private static String default_base_url = UrlConstant.GAN_HUO_API;
 
     private String token = (String) SPUtils.get(BaseApplication.getInstance(), "token", "");
 
     // 调用接口中的网络请求方法的对象
     private RetrofitService retrofitService;
-    private  Retrofit retrofit;
+    private Retrofit retrofit;
+    private OkHttpClient client = null;
+
+    private static class RetrofitHelperHolder {
+        private static final RetrofitHelper retrofitHelper = new RetrofitHelper();
+    }
 
     public static RetrofitHelper getInstance() {
-        return retrofitHelper;
+        return RetrofitHelperHolder.retrofitHelper;
+    }
+
+    public static RetrofitHelper getInstance(String default_base_url) {
+        RetrofitHelper.default_base_url = default_base_url;
+        return new RetrofitHelper();
     }
 
     private RetrofitHelper() {
         retrofit = new Retrofit.Builder()
-                .baseUrl(UrlConstant.BASE_URL)
+                .baseUrl(default_base_url)
                 .addConverterFactory(GsonConverterFactory.create())         // gson解析
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())  // rxjava支持
                 .client(getOkHttpClient())                                  // okhttpClient
                 .build();
-
         retrofitService = retrofit.create(RetrofitService.class);
     }
 
     private OkHttpClient getOkHttpClient() {
-
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder
-                .addInterceptor(addHeaderInterceptor())
-                .addInterceptor(addQueryParameterInterceptor())
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
-                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-
-        return builder.build();
+        if (client == null) {
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder
+                    .addInterceptor(addHeaderInterceptor())
+                    .addInterceptor(addQueryParameterInterceptor())
+                    .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
+                    .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                    .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                    .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+            client = builder.build();
+        }
+        return client;
     }
 
     /**
@@ -74,11 +84,18 @@ public class RetrofitHelper {
         return retrofitService;
     }
 
+    /**
+     * 调用此方法返回的将不再是单例的class
+     */
+    public T getRetrofitService(Class<T> tClass) {
+        return retrofit.create(tClass);
+    }
+
 
     /**
      * 设置公共参数
      */
-    private Interceptor addQueryParameterInterceptor(){
+    private Interceptor addQueryParameterInterceptor() {
         return new Interceptor() {     // 添加token公共请求头
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -104,7 +121,7 @@ public class RetrofitHelper {
 
                 Request authorised = originalRequest.newBuilder()
                         .header("token", token)
-                        .method(originalRequest.method(),originalRequest.body())
+                        .method(originalRequest.method(), originalRequest.body())
                         .build();
                 return chain.proceed(authorised);
             }

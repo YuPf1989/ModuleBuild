@@ -3,20 +3,24 @@
 // 2.使用 在子module的build.gradle，使用rootProject.ext.versions.compileSdkVersion 代替
 ext {
     dependVersion = [
-            androidSupportSdkVersion: "27.1.1",
-            retrofitSdkVersion      : "2.3.0",
-            glideSdkVersion         : "4.0.0",
-            rxJava                  : "2.1.5",
-            rxAndroid               : "2.0.1",
-            loggerInterceptor       : "3.9.0",
-            butterknife             : "8.8.1",
-            eventbus                : "3.1.1",
-            barlibrary              : "2.3.0",
-            BottomNavigationViewEx  : "1.2.4",
-            multiple_status_view    : "1.4",
+            androidSupportSdkVersion     : "27.1.1",
+            retrofitSdkVersion           : "2.3.0",
+            glideSdkVersion              : "4.0.0",
+            rxJava                       : "2.1.5",
+            rxAndroid                    : "2.0.1",
+            loggerInterceptor            : "3.9.0",
+            butterknife                  : "8.8.1",
+            eventbus                     : "3.1.1",
+            barlibrary                   : "2.3.0",
+            BottomNavigationViewEx       : "1.2.4",
+            multiple_status_view         : "1.4",
             //Arouter
-            arouter_compiler        : "1.1.4",
-            arouter_api             : "1.3.1"
+            arouter_compiler             : "1.1.4",
+            arouter_api                  : "1.3.1",
+            BaseRecyclerViewAdapterHelper: "2.9.35",
+            logger                       : "2.2.0",
+            flexbox                      : "1.0.0",
+            multidex                     : "1.0.2"
     ]
 
     versions = [
@@ -70,15 +74,19 @@ ext {
     arouter_api = "com.alibaba:arouter-api:$dependVersion.arouter_api"
     arouter_compiler = "com.alibaba:arouter-compiler:$dependVersion.arouter_compiler"
 
+    // 万能recyclerViewAdapter
+    BaseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$dependVersion.BaseRecyclerViewAdapterHelper"
+
+    logger = "com.orhanobut:logger:$dependVersion.logger"
+
+    // 谷歌开源的流式布局
+    flexbox = "com.google.android:flexbox:$dependVersion.flexbox"
+
+    multidex = "com.android.support:multidex:$dependVersion.multidex"
+
     supportLibs = supportDeps.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
-    otherLibs = [glide, butterknife]
-
-    annotationProcessorLibs = [butterknifeCompiler, glideCompiler]
 
 }
 
-/**
- *
- */

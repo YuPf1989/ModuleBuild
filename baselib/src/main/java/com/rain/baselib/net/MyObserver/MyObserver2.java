@@ -1,8 +1,9 @@
 package com.rain.baselib.net.MyObserver;
 
-import com.rain.mymvpdemo.base.BasePresenter;
-import com.rain.mymvpdemo.base.IBaseView;
-import com.rain.mymvpdemo.net.Exception.ExceptionHandle;
+
+import com.rain.baselib.base.BasePresenter;
+import com.rain.baselib.base.IBaseView;
+import com.rain.baselib.net.Exception.ExceptionHandle;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;

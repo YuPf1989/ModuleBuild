@@ -56,7 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initImmersionBar() {
         immersionBar = ImmersionBar.with(this);// 沉浸式状态栏设置
         immersionBar.fitsSystemWindows(true)
-//                .statusBarColor(R.color.colorPrimary)
+                .statusBarColor(R.color.colorPrimary)
 //                .navigationBarColor(R.color.colorPrimary)
                 .keyboardEnable(true)
                 .init();
@@ -113,7 +113,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void showLoadingProgressbar(){
-        createCenterProgressBar();
+        mProgressBar = createCenterProgressBar();
         if (mProgressBar.getVisibility() == View.GONE) {
             mProgressBar.setVisibility(View.VISIBLE);
         }

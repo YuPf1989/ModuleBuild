@@ -30,12 +30,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    api rootProject.ext.otherLibs
-    api rootProject.ext.annotationProcessorLibs
+    // glide
+    api rootProject.ext.glide
+    annotationProcessor rootProject.ext.glideCompiler
     // butterknife
     api rootProject.ext.butterknife
-    // annotationProcessorLibs
-    annotationProcessor rootProject.annotationProcessorLibs
+    // butterknifeCompiler
+    annotationProcessor rootProject.ext.butterknifeCompiler
     // 沉浸式状态栏
     api rootProject.ext.barlibrary
     // 多视图显示
@@ -46,4 +47,10 @@ dependencies {
     api rootProject.ext.rxJavaLibs
     //router
     api rootProject.ext.arouter_api
+    // baseQuickAdapter
+    api rootProject.ext.BaseRecyclerViewAdapterHelper
+    // logger
+    api rootProject.ext.logger
+    // flexbox流式布局
+    api rootProject.ext.flexbox
 }

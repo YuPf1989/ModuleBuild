@@ -17,6 +17,13 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        // 使用Arouter需要设置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+
     }
 
     buildTypes {
@@ -40,10 +47,15 @@ android {
         }
     }
 
+    // 忽略lint检查时报错
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':baselib')
-    annotationProcessor rootProject.arouter_compiler
+    annotationProcessor rootProject.ext.arouter_compiler
 }

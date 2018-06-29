@@ -35,26 +35,12 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
 
     @Override
     public void onShowLoading() {
-//        createProgressDialog("loading");
-//        if (!progressDialog.isShowing()) {
-//            progressDialog.show();
-//        }
         showLoadingProgressbar();
     }
 
     @Override
     public void onHideLoading() {
-//        if (null != progressDialog && progressDialog.isShowing()) {
-//            progressDialog.dismiss();
-//        }
         hideLoadingProgressbar();
     }
 
-    public ProgressDialog createProgressDialog(String msg) {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
-        }
-        progressDialog.setMessage(msg);
-        return progressDialog;
-    }
 }
