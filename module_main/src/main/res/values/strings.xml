@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">module_main</string>
+
+    <string name="title_home">news</string>
+    <string name="title_dashboard">girls</string>
+    <string name="title_notifications">预留</string>
 </resources>

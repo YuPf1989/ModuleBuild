@@ -43,8 +43,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(path: ':baselib')
     implementation rootProject.ext.multidex
+    implementation project(path: ':baselib')
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
         implementation project(':module_girls')

@@ -1,5 +1,6 @@
 package com.rain.module_main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.rain.baselib.util.ToastUtil;
  * Author:rain
  * Date:2018/6/29 9:44
  * Description:
+ * SplashActivity、登陆Activity以及主界面都应属于Main组件，
+ * 也就是说Android应用启动后要调用的页面应置于Main组件
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -54,7 +57,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } else if (view.getId() == R.id.girls_button) {
             ARouter.getInstance().build("/girls/list").navigation();
         }else if (view.getId() == R.id.fragment_button) {
-
+            startActivity(new Intent(this,BottomNavigationActivity.class));
         }
         ToastUtil.showToast("id:"+view.getId());
     }

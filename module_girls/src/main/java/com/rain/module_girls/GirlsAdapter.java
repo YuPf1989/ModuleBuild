@@ -8,7 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.rain.baselib.glide.GlideApp;
 import com.rain.module_girls.model.GirlsBean;
-import com.rain.modulebuild.R;
 
 import java.util.List;
 

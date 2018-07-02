@@ -9,13 +9,11 @@ import android.support.v7.widget.Toolbar;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.classic.common.MultipleStatusView;
-import com.google.android.flexbox.FlexboxLayoutManager;
 import com.rain.baselib.base.BaseMvpActivity;
 import com.rain.baselib.net.Exception.ErrorStatus;
 import com.rain.baselib.util.ToastUtil;
 import com.rain.module_girls.GirlsContract.View;
 import com.rain.module_girls.model.GirlsBean;
-import com.rain.modulebuild.R;
 
 import java.util.List;
 

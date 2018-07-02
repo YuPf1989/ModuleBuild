@@ -5,7 +5,6 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.rain.baselib.base.BaseApplication;
-import com.rain.baselib.util.Utils;
 
 /**
  * Author:rain
@@ -18,7 +17,7 @@ public class MyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         // 初始化路由
-        if (Utils.isAppDebug()) {
+        if (BuildConfig.DEBUG) {
             ARouter.openDebug();
             ARouter.openLog();
         }
@@ -32,6 +31,4 @@ public class MyApplication extends BaseApplication {
         // dex突破65535的限制
         MultiDex.install(this);
     }
-
-
 }
